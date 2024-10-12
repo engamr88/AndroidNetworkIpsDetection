@@ -1,6 +1,7 @@
 package io.qteam.networkipdetection
 
 import android.os.Bundle
+import android.view.View
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.ViewCompat
@@ -27,7 +28,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun processFetchNetworkIps() {
-        binding.infoTv.text = "Starting to fetch Network IPs ***"
+        binding.preStartInfoTv.text = "Starting to fetch Network IPs ***"
         val stringBuilder = StringBuilder()
         // Create instance from library with desired options
         val instance =
@@ -35,16 +36,21 @@ class MainActivity : AppCompatActivity() {
                 .build()
         // start fetching network ips and listen to changes..
         instance.fetchNetworkIps(object : ProgressListener {
-            override fun onUpdate(message: String) {
+            override fun onStart(message: String) {
                 stringBuilder.append(message)
                 stringBuilder.appendLine()
                 runOnUiThread {
-                    binding.infoTv.text = stringBuilder.toString()
+                    binding.preStartInfoTv.text = stringBuilder.toString()
                 }
             }
 
-            override fun onComplete(result: MutableList<String>) {
+            override fun onUpdate(percentage: Int) {
                 stringBuilder.clear()
+                showPercentageLayout(percentage)
+            }
+
+            override fun onComplete(result: MutableList<String>) {
+                hidePercentageLayout()
                 stringBuilder.append("Searching is done, Found ${result.size} devices")
                 stringBuilder.appendLine()
                 result.forEach {
@@ -58,5 +64,21 @@ class MainActivity : AppCompatActivity() {
 
         })
 
+    }
+
+    private fun hidePercentageLayout() {
+        runOnUiThread {
+            binding.loadingProgressLayout.visibility = View.GONE
+            binding.progressTv.text = ""
+            binding.loadingProgress.progress = 0
+        }
+    }
+
+    private fun showPercentageLayout(percentage: Int) {
+        runOnUiThread {
+            binding.loadingProgressLayout.visibility = View.VISIBLE
+            binding.progressTv.text = "$percentage%"
+            binding.loadingProgress.progress = percentage
+        }
     }
 }

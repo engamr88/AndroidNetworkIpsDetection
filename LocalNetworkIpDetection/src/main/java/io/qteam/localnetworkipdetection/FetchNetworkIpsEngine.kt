@@ -100,27 +100,27 @@ private fun fetchNetworkIps(
 
                     // reporting network detection progress section
                     if (progress in 0..19 && lastCommittedProgress == 0) {
-                        listener.onUpdate("Fetching Network Ips in progress $lastCommittedProgress% and found ${resultList.size} devices")
+                        listener.onUpdate(lastCommittedProgress)
 
                         lastCommittedProgress = 10
                     } else if (progress in 20..39 && lastCommittedProgress < 20) {
                         lastCommittedProgress = 20
-                        listener.onUpdate("Fetching Network Ips in progress $lastCommittedProgress% and found ${resultList.size} devices")
+                        listener.onUpdate(lastCommittedProgress)
                     } else if (progress in 40..59 && lastCommittedProgress < 40) {
                         lastCommittedProgress = 40
-                        listener.onUpdate("Fetching Network Ips in progress $lastCommittedProgress% and found ${resultList.size} devices")
+                        listener.onUpdate(lastCommittedProgress)
                     } else if (progress in 60..79 && lastCommittedProgress < 60) {
                         lastCommittedProgress = 60
-                        listener.onUpdate("Fetching Network Ips in progress $lastCommittedProgress% and found ${resultList.size} devices")
+                        listener.onUpdate(lastCommittedProgress)
                     } else if (progress in 80..89 && lastCommittedProgress < 80) {
                         lastCommittedProgress = 80
-                        listener.onUpdate("Fetching Network Ips in progress $lastCommittedProgress% and found ${resultList.size} devices")
+                        listener.onUpdate(lastCommittedProgress)
                     } else if (progress in 90..97 && lastCommittedProgress < 90) {
                         lastCommittedProgress = 90
-                        listener.onUpdate("Fetching Network Ips in progress $lastCommittedProgress% and found ${resultList.size} devices")
+                        listener.onUpdate(lastCommittedProgress)
                     } else if (progress in 98..100 && lastCommittedProgress < 100) {
                         lastCommittedProgress = 100
-                        listener.onUpdate("Fetching Network Ips in progress 100% and found ${resultList.size} devices")
+                        listener.onUpdate(100)
                     }
                 } catch (e: IOException) {
                     Log.e("ALLAH", "getNetworkIps: ${e.message}")
@@ -181,5 +181,5 @@ private fun printInitInformations(
     }
     stringBuilder.appendLine()
     stringBuilder.append("**************************************************")
-    listener.onUpdate(stringBuilder.toString())
+    listener.onStart(stringBuilder.toString())
 }
