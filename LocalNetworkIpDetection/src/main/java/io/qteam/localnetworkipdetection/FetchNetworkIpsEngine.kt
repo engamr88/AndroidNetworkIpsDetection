@@ -97,7 +97,7 @@ private fun fetchNetworkIps(
                     if (reachable) {
                         resultList.add(command.first)
                     }
-//                    Log.d("ALLAH", "Progress: ${progress}% and found ${resultList.size} devices")
+
                     // reporting network detection progress section
                     if (progress in 0..19 && lastCommittedProgress == 0) {
                         listener.onUpdate(lastCommittedProgress)
@@ -132,9 +132,6 @@ private fun fetchNetworkIps(
                         process?.outputStream?.close()
                         process?.errorStream?.close()
                         process?.destroy()
-//                        if (lastCommittedProgress == 100) {
-//                            listener.onComplete(resultList)
-//                        }
                     }
                 }
             }
