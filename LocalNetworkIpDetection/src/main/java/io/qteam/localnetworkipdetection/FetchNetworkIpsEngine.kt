@@ -5,13 +5,11 @@ import io.reactivex.Observable
 import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.schedulers.Schedulers
-import java.io.BufferedReader
 import java.io.IOException
-import java.io.InputStreamReader
 import java.util.concurrent.Executors
 
 
-class NetworkIpDetection private constructor(
+open class NetworkIpDetection private constructor(
     private var startRange: Int = 2,
     private var endRange: Int = 255,
     private var subnet: String = "192.168.1",
@@ -19,11 +17,11 @@ class NetworkIpDetection private constructor(
 ) {
 
 
-    fun fetchNetworkIps(listener: ProgressListener) {
+    open fun fetchNetworkIps(listener: ProgressListener) {
         fetchNetworkIps(startRange, endRange, subnet, observeResultInMainThread, listener)
     }
 
-    class Builder : IBuilder<NetworkIpDetection> {
+    open class Builder : IBuilder<NetworkIpDetection> {
         private var startRange: Int = 2
         private var endRange: Int = 255
         private var subnet: String = "192.168.1"
