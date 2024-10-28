@@ -85,12 +85,6 @@ private fun fetchNetworkIps(
                 var process: Process? = null
                 try {
                     process = processBuilder.start()
-                    BufferedReader(InputStreamReader(process?.inputStream)).use { reader ->
-                        var line: String?
-                        while ((reader.readLine().also { line = it }) != null) {
-                            // Process the output
-                        }
-                    }
                     // Wait for the process to finish
                     val returnVal = process?.waitFor()
                     val reachable = (returnVal == 0)
@@ -128,10 +122,10 @@ private fun fetchNetworkIps(
                     Log.e("ALLAH", "getNetworkIps: ${e.message}")
                 } finally {
                     if (process != null) {
-                        process?.inputStream?.close()
-                        process?.outputStream?.close()
-                        process?.errorStream?.close()
-                        process?.destroy()
+                        process.inputStream?.close()
+                        process.outputStream?.close()
+                        process.errorStream?.close()
+                        process.destroy()
                     }
                 }
             }

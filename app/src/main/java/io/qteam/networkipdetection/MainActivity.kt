@@ -49,11 +49,11 @@ class MainActivity : AppCompatActivity() {
                 showPercentageLayout(percentage)
             }
 
-            override fun onComplete(result: MutableList<String>) {
+            override fun onComplete(ipResultList: MutableList<String>) {
                 hidePercentageLayout()
-                stringBuilder.append("Searching is done, Found ${result.size} devices")
+                stringBuilder.append("Searching is done, Found ${ipResultList.size} devices")
                 stringBuilder.appendLine()
-                result.forEach {
+                ipResultList.forEach {
                     stringBuilder.append(it)
                     stringBuilder.appendLine()
                 }
